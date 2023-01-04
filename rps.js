@@ -57,48 +57,55 @@ function ermittlerWinner(user, comp){
         return "Fehler bei USer Eingabe";
     }
 }
-/*
-function game(){
-    let zaehlerGew = 0;
-    let zaehlerVer = 0;
-    for(let i = 0; i < 5; i++){
-        let playerSelec = prompt("Deine Wahl", "Schere");
-        let computerSelec = getComputerChoice();
-        let text = ermittlerWinner(playerSelec, computerSelec);
 
-        if(text.search('gewinnst')!=-1){
-            console.log(text);
-            zaehlerGew ++;
-            
-        }else if(text.search('verlierst')!=-1){
-            console.log(text);
-            zaehlerVer ++;
-        }else if(text.search('Ihr')!=-1){
-            console.log(text);
-        }else{
-            console.error(text);
-        }
+function game(text){
+    
+
+
+
+    if(text.search('gewinnst')!=-1){
+
+        zaehlerGew ++;
         
+    }else if(text.search('verlierst')!=-1){
+
+        zaehlerVer ++;
     }
+        
+    if(zaehlerGew<5 && zaehlerVer<5)return "";
     if(zaehlerGew > zaehlerVer){
-        console.log(`Du gewinnst mit ${zaehlerGew} zu ${zaehlerVer}!`);
+        return(`Du gewinnst mit ${zaehlerGew} zu ${zaehlerVer}!`);
     }else if(zaehlerGew < zaehlerVer){
-        console.log(`Du verlierst mit ${zaehlerGew} zu ${zaehlerVer}!`);
+        return(`Du verlierst mit ${zaehlerGew} zu ${zaehlerVer}!`);
     }else{
-        console.log(`Unentschieden: ${zaehlerGew} zu ${zaehlerVer}`)
+        return(`Unentschieden: ${zaehlerGew} zu ${zaehlerVer}`)
     }
 }
 
-game();
-*/
+let zaehlerGew = 0;
+let zaehlerVer = 0;
 const buttons = document.querySelectorAll('button');
+const divBut = document.querySelector('.buttons');
 const ergebnis = document.createElement('div');
 const bod = document.querySelector('body');
-
+const endstand = document.createElement('h1');
+const stand = document.createElement('h3');
+stand.textContent = `Stand: ${zaehlerGew}:${zaehlerVer}`;
+console.log(divBut);
+divBut.style.cssText = "display: flex;"
+divBut.appendChild(stand);
+buttons.forEach(btn => btn.style.cssText="flex: 1;")
 buttons.forEach(btn => btn.addEventListener('click', function(e){
 
     ergebnis.textContent = ermittlerWinner(`${btn.classList.value}`, getComputerChoice());
     bod.appendChild(ergebnis);
+    let end = game(ergebnis.textContent);
+    stand.textContent = `Stand: ${zaehlerGew}:${zaehlerVer}`
+    if(end){
+        endstand.textContent = end;
+        bod.appendChild(endstand);
+    }
+
 }
 
-))
+));
