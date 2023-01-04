@@ -46,7 +46,7 @@ function ermittlerWinner(user, comp){
             case 'ROCK':
                 return 'Du verlierst! Stein schlägt Schere';
             case 'SCISSORS':
-                return 'Ihr spielt Unentschieden! SChere trifft Schere';
+                return 'Ihr spielt Unentschieden! Schere trifft Schere';
             case 'PAPER':
                 return 'Du gewinnst! Schere schlägt Papier';
             default:
@@ -57,7 +57,7 @@ function ermittlerWinner(user, comp){
         return "Fehler bei USer Eingabe";
     }
 }
-
+/*
 function game(){
     let zaehlerGew = 0;
     let zaehlerVer = 0;
@@ -90,5 +90,15 @@ function game(){
 }
 
 game();
+*/
+const buttons = document.querySelectorAll('button');
+const ergebnis = document.createElement('div');
+const bod = document.querySelector('body');
 
+buttons.forEach(btn => btn.addEventListener('click', function(e){
 
+    ergebnis.textContent = ermittlerWinner(`${btn.classList.value}`, getComputerChoice());
+    bod.appendChild(ergebnis);
+}
+
+))
